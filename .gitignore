@@ -1,8 +1,4 @@
 node_modules
 dist
-/scripts
-/scripts
-*.js
-scripts/cards.js
-scripts/index.js
-index.html
+
+
