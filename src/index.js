@@ -1,5 +1,4 @@
 import "./index.css";
-//import { initialCards } from "./cards";
 import { createCard } from "./components/card";
 import { closeModal, openModal } from "./components/modal.js";
 import * as api from "./components/api.js";
@@ -20,7 +19,7 @@ const buttonSubmitProfile = document.querySelector(
 const cardsContainer = container.querySelector(".places__list");
 const popupEditProfile = document.querySelector(".popup_type_edit");
 const popupNewCard = document.querySelector(".popup_type_new-card");
-const popupNewCardModal = popupNewCard.querySelector(".popup__form");
+const newCardForm = popupNewCard.querySelector(".popup__form");
 const popupImage = document.querySelector(".popup__image");
 const popupPreviewImage = document.querySelector(".popup_type_image");
 const editProfileButton = document.querySelector(".profile__edit-button");
@@ -123,9 +122,9 @@ Promise.all([api.getProfileData(), api.getCards()])
         deleteCard,
         likeCard,
         showCard,
-        userData
+        userData._id
       );
-      cardsContainer.prepend(itemCard);
+      cardsContainer.append(itemCard);
     });
   })
   .catch((err) => {
@@ -166,14 +165,14 @@ function addCardSubmit(evt) {
         deleteCard,
         likeCard,
         showCard,
-        card.owner
+        card.owner._id
       );
       cardsContainer.prepend(newCardElement);
       closeModal(popupNewCard);
-      popupNewCard.reset();
+      newCardForm.reset();
     })
     .catch((err) => {
-      console.error(`Ошибка. Возможно не получилось загрузить
+      console.log(`Ошибка. Возможно не получилось загрузить
       карточку: ${err}`);
     })
     .finally(() => (buttonFormPlace.textContent = textOnSubmitButton));
@@ -196,7 +195,7 @@ function avatarFormSubmit(evt) {
     .finally(() => (buttonSubmitProfile.textContent = textOnSubmitButton));
 }
 
-popupNewCardModal.addEventListener("submit", addCardSubmit);
+newCardForm.addEventListener("submit", addCardSubmit);
 avatarCardForm.addEventListener("submit", avatarFormSubmit);
 
 enableValidation(validationParams);
