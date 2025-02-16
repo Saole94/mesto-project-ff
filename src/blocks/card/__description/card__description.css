@@ -1,5 +1,4 @@
 .card__description {
-<<<<<<< Updated upstream
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-rows: repeat(2, 1fr);
@@ -19,11 +18,6 @@
   justify-self: center;
   align-self: flex-end;
   grid-area: count;
-=======
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #fff;
-  padding: 25px 20px;
->>>>>>> Stashed changes
 }
+
+
