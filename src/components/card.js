@@ -7,7 +7,7 @@ export function createCard(
   cbDelCard,
   cbLikeCard,
   cbShowImage,
-  userData
+  userID
 ) {
   const cardElement = cardTemplate
     .querySelector(".places__item")
@@ -22,13 +22,13 @@ export function createCard(
   cardImage.alt = cardData.name;
   cardElement.querySelector(".card__title").textContent = cardData.name;
 
-  isMyCard(cardData.owner._id, userData._id)
+  isMyCard(cardData.owner._id, userID)
     ? deleteButton.addEventListener("click", () => {
         cbDelCard(cardData, cardElement);
       })
     : deleteButton.remove();
 
-  hasLikeCard(cardData.likes, userData._id) &&
+  hasLikeCard(cardData.likes, userID) &&
     likeButton.classList.toggle("card__like-button_is-active");
 
   likeButton.addEventListener("click", () => {
