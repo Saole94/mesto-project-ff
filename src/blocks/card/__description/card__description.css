@@ -1,7 +1,21 @@
 .card__description {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: repeat(2, 1fr);
   align-items: center;
   background: #fff;
   padding: 25px 20px;
+  grid-template-areas:
+  "title button"
+  "title count";
+  gap: 0px 0px;
+}
+
+.card__like-counter {
+  margin: 0;
+  font-size: 13px;
+  line-height: 15px;
+  justify-self: center;
+  align-self: flex-end;
+  grid-area: count;
 }
