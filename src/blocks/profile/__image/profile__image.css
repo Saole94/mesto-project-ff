@@ -1,5 +1,8 @@
 .profile__image {
+<<<<<<< Updated upstream
   position: relative;
+=======
+>>>>>>> Stashed changes
   width: 120px;
   height: 120px;
   -webkit-border-radius: 50%;
@@ -8,6 +11,7 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+<<<<<<< Updated upstream
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
@@ -47,6 +51,8 @@
   -ms-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
+=======
+>>>>>>> Stashed changes
 }
 
 @media screen and (max-width: 740px) {
