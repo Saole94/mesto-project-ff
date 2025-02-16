@@ -1,28 +1,51 @@
+//import { deleteCard, putLikeCard, delDislikeCard } from "./api.js";
+
 const cardTemplate = document.querySelector("#card-template").content;
 
-export function createCard(item, onDeleteCard, handLike, openImage) {
+export function createCard(
+  cardData,
+  cbDelCard,
+  cbLikeCard,
+  cbShowImage,
+  userData
+) {
   const cardElement = cardTemplate
     .querySelector(".places__item")
     .cloneNode(true);
-  const deleteButton = cardElement.querySelector(".card__delete-button");
   const cardImage = cardElement.querySelector(".card__image");
+  const deleteButton = cardElement.querySelector(".card__delete-button");
   const likeButton = cardElement.querySelector(".card__like-button");
+  const likeCounter = cardElement.querySelector(".card__like-counter");
+  likeCounter.textContent = cardData.likes.length;
 
-  cardImage.src = item.link;
-  cardImage.alt = item.name;
-  cardElement.querySelector(".card__title").textContent = item.name;
+  cardImage.src = cardData.link;
+  cardImage.alt = cardData.name;
+  cardElement.querySelector(".card__title").textContent = cardData.name;
 
-  deleteButton.addEventListener("click", onDeleteCard);
-  likeButton.addEventListener("click", () => handLike(likeButton));
-  cardImage.addEventListener("click", () => openImage(item.link, item.name));
+  isMyCard(cardData.owner._id, userData._id)
+    ? deleteButton.addEventListener("click", () => {
+        cbDelCard(cardData, cardElement);
+      })
+    : deleteButton.remove();
+
+  hasLikeCard(cardData.likes, userData._id) &&
+    likeButton.classList.toggle("card__like-button_is-active");
+
+  likeButton.addEventListener("click", () => {
+    cbLikeCard(cardData, likeButton, likeCounter);
+  });
+
+  cardImage.addEventListener("click", () => {
+    cbShowImage(cardData);
+  });
 
   return cardElement;
 }
 
-export function deleteCard(evt) {
-  evt.target.closest(".places__item").remove();
+function isMyCard(cardOwn, id) {
+  return cardOwn === id;
 }
 
-export function handLike(button) {
-  button.classList.toggle("card__like-button_is-active");
+function hasLikeCard(likes, id) {
+  return likes.some((card) => card._id === id);
 }
